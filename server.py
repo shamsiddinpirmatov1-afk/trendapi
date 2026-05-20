@@ -5,20 +5,6 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-# запасной список (если Google не ответит)
-fallback_trends = [
-    "iPhone 16 leak",
-    "TikTok AI filter",
-    "Messi news",
-    "Instagram Reels update",
-    "YouTube Shorts trend",
-    "AI video generator",
-    "ChatGPT update",
-    "Viral dance challenge",
-    "Netflix new series",
-    "Gaming PC build trend"
-]
-
 @app.route("/")
 def home():
     return "API is running"
@@ -26,16 +12,28 @@ def home():
 @app.route("/api/trends")
 def trends():
 
-    # имитация "live trends"
+    trends_list = [
+        "iPhone 16 leak",
+        "TikTok AI filter",
+        "Instagram Reels boost",
+        "Messi injury update",
+        "YouTube Shorts viral",
+        "ChatGPT new update",
+        "AI video generator",
+        "Gaming setup trend",
+        "Netflix new series",
+        "Viral dance challenge"
+    ]
+
     result = {"trends": []}
 
-    shuffled = random.sample(fallback_trends, len(fallback_trends))
+    shuffled = random.sample(trends_list, len(trends_list))
 
     for i, t in enumerate(shuffled[:10]):
         result["trends"].append({
             "title": t,
-            "views": f"{random.randint(100, 900)}K+",
-            "source": "live"
+            "views": f"{random.randint(100,900)}K+",
+            "source": "stable-api"
         })
 
     return jsonify(result)
