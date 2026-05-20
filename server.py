@@ -7,6 +7,10 @@ CORS(app)
 
 pytrends = TrendReq(hl='en-US', tz=360)
 
+@app.route("/")
+def home():
+    return "API is running"
+
 @app.route("/api/trends")
 def trends():
     data = pytrends.trending_searches(pn="united_states")
